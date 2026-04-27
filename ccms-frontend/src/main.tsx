@@ -9,15 +9,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <App />
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: {
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '13px',
-          },
-        }}
-      />
+      <Toaster position="top-right" />
     </BrowserRouter>
   </StrictMode>,
 )

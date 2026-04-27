@@ -1,15 +1,15 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useIdeasStore }    from './store/useIdeasStore'
+import { useScheduleStore } from './store/useScheduleStore'
+import { useCollabStore }   from './store/useCollabStore'
+import { SEED_IDEAS, SEED_POSTS, SEED_COLLABS } from './lib/seedData'
 import Layout    from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Ideas     from './pages/Ideas'
 import Schedule  from './pages/Schedule'
 import Collabs   from './pages/Collabs'
 import Analytics from './pages/Analytics'
-import { useIdeasStore }    from './store/useIdeasStore'
-import { useScheduleStore } from './store/useScheduleStore'
-import { useCollabStore }   from './store/useCollabStore'
-import { SEED_IDEAS, SEED_POSTS, SEED_COLLABS } from './lib/seedData'
 
 export default function App() {
   const setIdeas   = useIdeasStore((s) => s.setIdeas)
