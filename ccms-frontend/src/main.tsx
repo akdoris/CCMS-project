@@ -3,13 +3,25 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import './index.css'
-import App from './App.tsx'
+import App from './App'
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')
+if (!rootElement) throw new Error('Root element not found')
+
+createRoot(rootElement).render(
   <StrictMode>
     <BrowserRouter>
       <App />
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            fontFamily: 'Inter, sans-serif',
+            fontSize:   '13px',
+            borderRadius: '12px',
+          },
+        }}
+      />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )

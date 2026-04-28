@@ -1,6 +1,7 @@
-import { cn } from '../../lib/utils'
+import { clsx } from 'clsx'
+import type { SelectHTMLAttributes } from 'react'
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   label?: string
   options: { value: string; label: string }[]
 }
@@ -14,15 +15,18 @@ export default function Select({ label, options, className, ...props }: SelectPr
         </label>
       )}
       <select
-        className={cn(
-          'w-full px-3.5 py-2.5 border border-black/10 rounded-xl text-sm text-[#0d0f14] bg-white transition-all appearance-none cursor-pointer',
-          'focus:outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/10',
+        className={clsx(
+          'w-full px-3.5 py-2.5 rounded-xl text-sm text-[#0d0f14] bg-white transition-all',
+          'border border-gray-200 focus:outline-none focus:border-[#c9a84c]',
+          'appearance-none cursor-pointer',
           className
         )}
         {...props}
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
         ))}
       </select>
     </div>

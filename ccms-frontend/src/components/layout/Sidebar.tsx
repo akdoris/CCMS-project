@@ -1,15 +1,18 @@
 import { NavLink } from 'react-router-dom'
-import {
-  LayoutDashboard, Lightbulb, CalendarDays,
-  Handshake, BarChart3, Sparkles,
-} from 'lucide-react'
 
-const navItems = [
-  { to: '/dashboard', label: 'Dashboard',         icon: LayoutDashboard },
-  { to: '/ideas',     label: 'Content Ideas',     icon: Lightbulb,   badge: 2 },
-  { to: '/schedule',  label: 'Schedule',          icon: CalendarDays },
-  { to: '/collabs',   label: 'Brand Collabs',     icon: Handshake,   badge: 1 },
-  { to: '/analytics', label: 'Analytics',         icon: BarChart3 },
+type NavItem = {
+  to: string
+  label: string
+  emoji: string
+  badge?: number
+}
+
+const navItems: NavItem[] = [
+  { to: '/dashboard', label: 'Dashboard',      emoji: '🏠' },
+  { to: '/ideas',     label: 'Content Ideas',  emoji: '💡', badge: 2 },
+  { to: '/schedule',  label: 'Schedule',       emoji: '📅' },
+  { to: '/collabs',   label: 'Brand Collabs',  emoji: '🤝', badge: 1 },
+  { to: '/analytics', label: 'Analytics',      emoji: '📊' },
 ]
 
 export default function Sidebar() {
@@ -19,12 +22,14 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="px-6 py-7 border-b border-white/5">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#c9a84c] flex items-center justify-center">
-            <Sparkles size={16} className="text-[#0d0f14]" />
+          <div className="w-9 h-9 rounded-xl bg-[#c9a84c] flex items-center justify-center text-[#0d0f14] font-bold text-sm">
+            ✦
           </div>
           <div>
-            <p className="font-display text-white font-bold text-sm leading-none">CCMS</p>
-            <p className="text-[10px] text-white/30 uppercase tracking-widest mt-0.5">Creator Studio</p>
+            <p className="text-white font-bold text-sm leading-none">CCMS</p>
+            <p className="text-[10px] text-white/30 uppercase tracking-widest mt-0.5">
+              Creator Studio
+            </p>
           </div>
         </div>
       </div>
@@ -34,7 +39,7 @@ export default function Sidebar() {
         <p className="text-[9px] font-semibold text-white/20 uppercase tracking-widest px-3 mb-2">
           Workspace
         </p>
-        {navItems.map(({ to, label, icon: Icon, badge }) => (
+        {navItems.map(({ to, label, emoji, badge }) => (
           <NavLink
             key={to}
             to={to}
@@ -46,16 +51,12 @@ export default function Sidebar() {
               }`
             }
           >
-            {({ isActive }) => (
-              <>
-                <Icon size={16} className={isActive ? 'text-[#c9a84c]' : ''} />
-                <span className="flex-1">{label}</span>
-                {badge && (
-                  <span className="bg-[#e8614d] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
-                    {badge}
-                  </span>
-                )}
-              </>
+            <span className="text-base">{emoji}</span>
+            <span className="flex-1">{label}</span>
+            {badge && (
+              <span className="bg-[#e8614d] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                {badge}
+              </span>
             )}
           </NavLink>
         ))}
@@ -64,7 +65,10 @@ export default function Sidebar() {
       {/* User */}
       <div className="px-3 py-4 border-t border-white/5">
         <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#c9a84c] to-[#2cc4a0] flex items-center justify-center text-xs font-bold text-[#0d0f14] font-display">
+          <div
+            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-[#0d0f14]"
+            style={{ background: 'linear-gradient(135deg, #c9a84c, #2cc4a0)' }}
+          >
             AM
           </div>
           <div>

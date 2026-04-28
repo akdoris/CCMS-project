@@ -1,6 +1,9 @@
 export type Platform = 'YouTube' | 'Instagram' | 'TikTok' | 'Twitter'
+
 export type IdeaStatus = 'Draft' | 'InProgress' | 'Published'
+
 export type CollabStatus = 'Pending' | 'Active' | 'Completed' | 'Cancelled'
+
 export type ScheduleStatus = 'Upcoming' | 'Posted' | 'Postponed'
 
 export type ContentIdea = {

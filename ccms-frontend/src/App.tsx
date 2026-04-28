@@ -20,16 +20,16 @@ export default function App() {
     setIdeas(SEED_IDEAS)
     setPosts(SEED_POSTS)
     setCollabs(SEED_COLLABS)
-  }, [])
+  }, [setIdeas, setPosts, setCollabs])
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="ideas"     element={<Ideas />} />
-        <Route path="schedule"  element={<Schedule />} />
-        <Route path="collabs"   element={<Collabs />} />
+        <Route path="ideas"     element={<Ideas />}     />
+        <Route path="schedule"  element={<Schedule />}  />
+        <Route path="collabs"   element={<Collabs />}   />
         <Route path="analytics" element={<Analytics />} />
       </Route>
     </Routes>
