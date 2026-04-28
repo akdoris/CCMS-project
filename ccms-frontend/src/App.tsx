@@ -10,6 +10,8 @@ import Ideas     from './pages/Ideas'
 import Schedule  from './pages/Schedule'
 import Collabs   from './pages/Collabs'
 import Analytics from './pages/Analytics'
+import { Login} from './pages/Login'
+import {Signup} from './pages/Signup'
 
 export default function App() {
   const setIdeas   = useIdeasStore((s) => s.setIdeas)
@@ -32,6 +34,8 @@ export default function App() {
         <Route path="collabs"   element={<Collabs />}   />
         <Route path="analytics" element={<Analytics />} />
       </Route>
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
     </Routes>
   )
 }
