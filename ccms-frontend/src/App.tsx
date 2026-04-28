@@ -33,9 +33,9 @@ export default function App() {
         <Route path="schedule"  element={<Schedule />}  />
         <Route path="collabs"   element={<Collabs />}   />
         <Route path="analytics" element={<Analytics />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
       </Route>
-      <Route path="login" element={<Login />} />
-      <Route path="signup" element={<Signup />} />
     </Routes>
   )
 }
