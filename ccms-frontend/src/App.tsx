@@ -10,8 +10,8 @@ import Ideas     from './pages/Ideas'
 import Schedule  from './pages/Schedule'
 import Collabs   from './pages/Collabs'
 import Analytics from './pages/Analytics'
-import { Login} from './pages/Login'
-import {Signup} from './pages/Signup'
+import Login     from './pages/Login'
+import Signup    from './pages/Signup'
 
 export default function App() {
   const setIdeas   = useIdeasStore((s) => s.setIdeas)
@@ -25,17 +25,23 @@ export default function App() {
   }, [setIdeas, setPosts, setCollabs])
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="ideas"     element={<Ideas />}     />
-        <Route path="schedule"  element={<Schedule />}  />
-        <Route path="collabs"   element={<Collabs />}   />
-        <Route path="analytics" element={<Analytics />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-      </Route>
-    </Routes>
+      <Routes>
+        {/* Public routes — no sidebar */}
+        <Route path="/login"  element={<Login />}  />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Protected routes — with sidebar layout */}
+        <Route path="/" element={<Layout />}>
+          <Route index     element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="ideas"     element={<Ideas />}     />
+          <Route path="schedule"  element={<Schedule />}  />
+          <Route path="collabs"   element={<Collabs />}   />
+          <Route path="analytics" element={<Analytics />} />
+        </Route>
+
+        {/* Default — redirect to login */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
   )
 }
