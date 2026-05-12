@@ -1,0 +1,71 @@
+/* ── Gradient backgrounds ─────────────────────────────── */
+.bg-gradient-gold-teal {
+  background: linear-gradient(135deg, #c9a84c, #2cc4a0);
+}
+
+.bg-gradient-ink {
+  background: linear-gradient(135deg, #c9a84c, #2cc4a0);
+}
+
+/* ── Platform event colors ────────────────────────────── */
+.event-youtube {
+  background-color: rgba(255, 0, 0, 0.13);
+  color: #FF0000;
+}
+.event-instagram {
+  background-color: rgba(193, 53, 132, 0.13);
+  color: #C13584;
+}
+.event-tiktok {
+  background-color: rgba(51, 51, 51, 0.1);
+  color: #333333;
+}
+.event-twitter {
+  background-color: rgba(29, 161, 242, 0.13);
+  color: #1DA1F2;
+}
+
+/* ── Today highlight ──────────────────────────────────── */
+.cal-today {
+  background-color: #fffbf0;
+}
+
+/* ── Collab progress bar colors ───────────────────────── */
+.progress-completed { background-color: #2cc4a0; }
+.progress-cancelled { background-color: #e5e7eb; }
+.progress-default   { background-color: #c9a84c; }
+
+/* ── Revenue pipeline dots ────────────────────────────── */
+.dot-active    { background-color: #2cc4a0; }
+.dot-completed { background-color: #c9a84c; }
+.dot-pending   { background-color: #7c6fcd; }
+.dot-default   { background-color: #d1d5db; }
+
+/* ── Notification unread highlight ───────────────────── */
+.notif-unread { background-color: rgba(255, 251, 240, 0.4); }
+
+/* ── Status colors ────────────────────────────────────── */
+.text-gold    { color: #c9a84c; }
+.text-teal    { color: #2cc4a0; }
+.text-coral   { color: #e8614d; }
+.text-violet  { color: #7c6fcd; }
+
+/* ── Stat card top bars ───────────────────────────────── */
+.bar-gold     { background: linear-gradient(90deg, #c9a84c, #f0c96b); }
+.bar-teal     { background: linear-gradient(90deg, #2cc4a0, #4dd9bf); }
+.bar-coral    { background: linear-gradient(90deg, #e8614d, #f0856e); }
+.bar-lavender { background: linear-gradient(90deg, #7c6fcd, #9e94e0); }
+
+/* ── Calendar cell background ─────────────────────────── */
+.cal-other-month { background-color: #f9fafb; }
+.cal-normal      { background-color: #ffffff; }
+
+/* ── Dynamic bar heights via CSS custom property ─────────── */
+.bar-dynamic {
+  height: var(--bar-height, 0%);
+}
+
+/* ── Dynamic progress width via CSS custom property ──────── */
+.progress-dynamic {
+  width: var(--progress-width, 0%);
+}
