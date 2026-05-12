@@ -1,17 +1,31 @@
-import axios from 'axios';
+import axios from 'axios'
 
-// This points to your ccms-backend (running on port 5000)
-const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
-});
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api',
+  headers: { 'Content-Type': 'application/json' },
+})
 
-// Automatically attach the JWT token to every request if the user is logged in
-API.interceptors.request.use((req) => {
-  const token = localStorage.getItem('token');
-  if (token && req.headers) {
-    req.headers.Authorization = `Bearer ${token}`;
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('ccms_token')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error)
+)
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('ccms_token')
+      localStorage.removeItem('ccms_user')
+      window.location.href = '/login'
+    }
+    return Promise.reject(error)
   }
-  return req;
-});
+)
 
-export default API;
+export default api
