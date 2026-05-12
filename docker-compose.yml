@@ -1,0 +1,71 @@
+services:
+
+  # ── MongoDB ─────────────────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: ccms_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: ccms_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ccms_network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ── Spring Boot Backend ──────────────────────────────────────
+  backend:
+    build:
+      context: ./ccms-backend
+      dockerfile: Dockerfile
+    container_name: ccms_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/ccms_db
+      SPRING_DATA_MONGODB_DATABASE: ccms_db
+      APP_JWT_SECRET: ccms_super_secret_jwt_key_2025_spring_boot_mongodb
+      APP_JWT_EXPIRATION: 604800000
+      APP_CORS_ALLOWED_ORIGINS: http://localhost
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - ccms_network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ── React Frontend ───────────────────────────────────────────
+  frontend:
+    build:
+      context: ./ccms-frontend
+      dockerfile: Dockerfile
+    container_name: ccms_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - ccms_network
+
+networks:
+  ccms_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
